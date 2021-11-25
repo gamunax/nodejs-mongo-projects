@@ -5,7 +5,11 @@ const app = express();
 
 connectDB();
 
+app.use(express.json({ extented: true }));
+
 const PORT = process.env.PORT || 4000;
+
+app.use('/api/usuarios', require('./routes/usuarios'));
 
 app.listen(PORT, () => {
   console.log(`run server ${PORT}`);
