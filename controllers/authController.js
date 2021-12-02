@@ -12,7 +12,7 @@ exports.autenticarUsuario = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    let user = await Usuario.findOne({ email: email, password: password });
+    let user = await Usuario.findOne({ email });
     if (!user) {
       return res.status(400).json({ msg: 'El usuario no existe' });
     }
@@ -29,7 +29,7 @@ exports.autenticarUsuario = async (req, res) => {
     };
 
     jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: 3_600
+      expiresIn: 7_200
     }, (error, token) => {
       if (error) throw error;
 
