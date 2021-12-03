@@ -13,5 +13,20 @@ router.post('/',
   tareaController.crearTarea
 );
 
+router.get('/:proyectoId',
+  authMiddleware,
+  [],
+  tareaController.obtenerTareas
+);
+
+router.put('/:id',
+  authMiddleware,
+  tareaController.actualizarTarea
+);
+
+router.delete('/:id',
+  authMiddleware,
+  tareaController.eliminarTarea
+);
 
 module.exports = router;
