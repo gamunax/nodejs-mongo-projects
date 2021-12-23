@@ -19,7 +19,7 @@ exports.autenticarUsuario = async (req, res) => {
 
     const passwordSuccess = await bcryptjs.compare(password, user.password)
     if (!passwordSuccess) {
-      return res.status(400).json({msg: 'Password incorrecto'});
+      return res.status(400).json({ msg: 'Password incorrecto' });
     }
 
     const payload = {
@@ -37,5 +37,15 @@ exports.autenticarUsuario = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+  }
+}
+
+exports.usuarioAutenticado = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id).select('-password');
+    res.status(200).json({ usuario });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Hubo un error' });
   }
 }
